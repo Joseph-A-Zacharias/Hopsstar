@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+<head itemscope itemtype="https://schema.org/WebPage">
+{% block title %}Campus List for Educational Opportunities{% endblock title %}
+{% block  meta %}
+<meta name="description" content="Browse a comprehensive list of campuses for various educational levels. Find the best institutions.">
+<link rel="canonical" href="{{ canonical_url }}">
+<meta property="og:title" content="Explore Campus Lists">
+<meta property="og:description" content="Explore the top campuses for all levels of education. Find the perfect institution for your academic success.">
+<meta property="og:url" content="{{ canonical_url }}">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://www.hopelism.com/static/images/Hopelismshare.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta itemprop="name" content="Hopelism Campus List">
+<meta itemprop="url" content="{{ request.build_absolute_uri }}">
+<meta itemprop="description" content="Browse through the comprehensive list of campuses available at Hopelism, offering various educational opportunities.">
+{% endblock meta %}
+{% block critialcss %}
+.mobile-list{display:none;}
+.notelistbox h4{color:#04AA6D;}
+.notelistbox button{background-color: #04AA6D;}
+.notelistbox2 h6{color:#3ECD5E}
+{% endblock critialcss %}
+{% block content %}
+    <div class="mainbox">
+        {% if campus_ads_data %}
+            {% for campusads in campus_ads_data %}
+                <div class="notelistbox bordercampus" >
+                    <div class="notelistbox2"><h6>ad</h6></div>
+                    <h2 class="faqh1">{{ campusads.ad_college_name }}</h2>
+                    <h5>University :</h5>
+                    <h4>{{ campusads.ad_university_name }}</h4>
+                    <h5>Affiliation :</h5>
+                    <h4>{{ campusads.ad_affliation }}</h4>
+                    <h5>Campus Rating :</h5>
+                    <h4>{{ campusads.ad_rank }} / 5</h4>
+                    <a href="{{ campusads.ad_link }}" class="loadingloader">
+                        <button class="btn1 cheatsheeth5">view more details</button>
+                    </a>
+                </div>
+            {% endfor %}
+        {% endif %}
+        {% if campuslist_data %}
+            {% for campuslist in campuslist_data %}
+                <div class="notelistbox bordercampus" itemscope itemtype="https://schema.org/CollegeOrUniversity">
+                    <h2 class="faqh1" itemprop="name">{{ campuslist.college_name|title }}</h2>
+                    <h5 itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">University :</h5>
+                    <h4 itemprop="affiliation">{{ campuslist.university_name|title }}</h4>
+                    <h5>Affiliation :</h5>
+                    <h4 itemprop="affiliation">{{ campuslist.affliation|upper }}</h4>
+                    <h5>Campus Rating :</h5>
+                    <h4 itemprop="ratingValue">{{ campuslist.rank }} / 5</h4>
+                    <a href="{% url 'campusblog' campuslist.college_name %}" class="loadingloader" itemprop="url">
+                        <button class="btn1 cheatsheeth5">view more details</button>
+                    </a>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock content %}

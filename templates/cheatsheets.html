@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+<head itemscope itemtype="https://schema.org/WebPage">
+{% block title %}Explore Free Cheat Sheets for Academic & Non-Academic Subjects{% endblock title %}
+{% block  meta %}
+<meta name="description" content="Simplify your learning with our cheat sheets for academic and non-academic subjects. Unlock knowledge on any topic with Engsster's resources.">
+<meta name="keywords" content="cheat sheets, academic subjects, non-academic subjects, study resources, quick notes, educational cheat sheets, learning tools, knowledge guide, short notes, academic help, exam prep, topic summaries, quick references, study hacks, subject guides, simplified learning, Hopelism resources">
+<meta name="classification" content="Cheat Sheets, Study Guides, Quick Reference, Academic Learning, Non-Academic Subjects, Study Resources">
+<link rel="canonical" href="{{ canonical_url }}">
+<meta property="og:title" content="Explore Free Cheat Sheets for Academic & Non-Academic Subjects">
+<meta property="og:description" content="Simplify your learning process with our detailed cheat sheets covering both academic and non-academic subjects. Get quick access to key concepts and knowledge.">
+<meta property="og:url" content="{{ canonical_url }}">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://www.hopelism.com/static/images/Hopelismshare.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta itemprop="name" content="Hopelism Cheatsheets">
+<meta itemprop="url" content="{{ request.build_absolute_uri }}">
+<meta itemprop="description" content="Access a variety of educational shortnotes provided by Hopelism.">
+{% endblock meta %}
+{% block critialcss %}
+.mobile-list{display:none;}
+{% endblock critialcss %}
+{% block content %}
+<form id="searchForm" action="{% url 'cheatsearch' %}" method="POST">
+  {% csrf_token %}
+  <div class="searchbox">
+    <div class="box">
+      <image src="{% static "/images/search.png" %}" alt="Search Icon">
+      <input type="text" id="searchInput2" name="searchInput2" placeholder="Search Cheat Sheets...">
+    </div>
+  </div>
+</form>
+<div class="mainbox">
+  {% if cheatname_data %}
+    {% for cheat in cheatname_data %}
+      <div class="notelistdiv1" itemscope itemtype="https://schema.org/ItemList">
+        <a href="{% url 'cheatsheetsblog' cheat.cheat_name %}" class="loadingloader" itemprop="url">
+          <summary itemprop="itemListElement" itemscope itemtype="https://schema.org/Item" style="border-bottom: 4px solid #f9b234; border-top: 4px solid #f9b234;">
+            <h3 itemprop="name">{{ cheat.cheat_name|upper }}</h3>
+          </summary>
+        </a>
+      </div>
+    {% endfor %}
+  {% elif cheatsearch_data %}
+    {% for search in cheatsearch_data %}
+      <div class="notelistdiv1">
+        <a href="{% url 'cheatsheetsblog' search.cheat_name %}" class="loadingloader">
+          <summary style="border-bottom: 4px solid #f9b234; border-top: 4px solid #f9b234;">
+            <h3>{{ search.cheat_name|upper }}</h3>
+          </summary>
+        </a>
+      </div>
+    {% endfor %}
+  {% else %}
+    {% if request.method == 'POST' %}        
+      <summary class="faq-header">
+        <h5 class="cheatsheeth5">Search result not found !</h5>
+      </summary>
+    {% endif %}
+  {% endif %}
+</div>
+{% endblock content %}

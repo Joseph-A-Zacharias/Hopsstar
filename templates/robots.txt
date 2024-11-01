@@ -1,0 +1,33 @@
+User-Agent: *
+Disallow: /admin/
+Disallow: /static/
+
+User-agent: BadBot
+Disallow: /
+
+User-agent: DodsBot
+Disallow: /
+
+User-agent: EvilScraper
+Disallow: /
+
+User-agent: SpamBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Omgilibot
+Disallow: /
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: XoviBot
+Disallow: /
+
+User-agent: Baiduspider
+Disallow: /
+
+User-agent: DDoSBot
+Disallow: /

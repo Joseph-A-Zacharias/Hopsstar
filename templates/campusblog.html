@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+<head itemscope itemtype="https://schema.org/WebPage">
+{% block title %}Exploreing Educational Institutions Detail Blog{% endblock title %}
+{% block  meta %}
+<meta name="description" content="Explore insightful articles and resources about various campuses, schools, and educational institutions. Stay informed about the best education options.">
+<link rel="canonical" href="{{ canonical_url }}">
+<meta property="og:title" content="Campus Reads">
+<meta property="og:description" content="Discover the latest news and resources on top campuses and educational institutions. Learn more about your education options through our blog.">
+<meta property="og:url" content="{{ canonical_url }}">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://www.hopelism.com/static/images/Hopelismshare.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta itemprop="name" content="Best campuses Blog">
+<meta itemprop="url" content="{{ request.build_absolute_uri }}">
+<meta itemprop="description" content="Explore insightful articles and resources about various campuses, schools, and educational institutions. Stay informed about the best education options.">
+{% endblock meta %}
+{% block critialcss %}
+.mobile-list{display:none;}
+{% endblock critialcss %}
+{% block content %}
+    <div id="notesblog" itemscope itemtype="https://schema.org/Blog" itemprop="articleBody">{{campublog_data.campus_blog |safe}}</div>
+{% endblock content %}

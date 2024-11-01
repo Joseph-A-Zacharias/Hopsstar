@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<svg width="837.49963" height="606.99923" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" data-name="Layer 1">
+ <g class="layer">
+  <title>Layer 1</title>
+  <path d="m699.2,87l-601.39,0a10.82,8.49 0 0 0 -10.8,8.48l0,279.03a10.82,8.49 0 0 0 10.8,8.48l601.39,0a10.82,8.49 0 0 0 10.8,-8.48l0,-279.03a10.82,8.49 0 0 0 -10.8,-8.48zm8.4,287.52a8.41,6.61 0 0 1 -8.4,6.6l-601.39,0a8.41,6.61 0 0 1 -8.4,-6.6l0,-279.03a8.41,6.61 0 0 1 8.4,-6.6l601.39,0a8.41,6.61 0 0 1 8.4,6.6l0,279.03z" fill="#3f3d56" id="svg_1" transform="matrix(1 0 0 1 0 0)"/>
+  <rect fill="#3f3d56" height="2" id="svg_2" width="609" x="95" y="124"/>
+  <circle cx="156" cy="104.5" fill="#ccc" id="svg_3" r="7"/>
+  <circle cx="154.31" cy="98.99" fill="#ccc" id="svg_4" r="10.51" transform="matrix(-0.631025 -0.00676404 0.00658788 -0.647899 231.232 169.844)"/>
+  <circle cx="110" cy="105" fill="#ccc" id="svg_5" r="6.5"/>
+  <path d="m512.5,545.5l-242,0a8.51,8.51 0 0 1 -8.5,-8.5l0,-271a8.51,8.51 0 0 1 8.5,-8.5l242,0a8.51,8.51 0 0 1 8.5,8.5l0,271a8.51,8.51 0 0 1 -8.5,8.5z" fill="#f9b234" id="svg_6" transform="matrix(1 0 0 1 0 0)"/>
+  <path d="m465.5,341.5l-142,0a12.5,12.5 0 0 1 0,-25l142,0a12.5,12.5 0 0 1 0,25z" fill="#fff" id="svg_7" transform="matrix(1 0 0 1 0 0)"/>
+  <path d="m465.75,411.5l-142,0a12.5,12.5 0 0 1 0,-25l142,0a12.5,12.5 0 0 1 0,25z" fill="#fff" id="svg_8" transform="matrix(1 0 0 1 0 0)"/>
+  <path d="m467.75,483.5l-142,0a12.5,12.5 0 1 1 0,-25l142,0a12.5,12.5 0 0 1 0,25z" fill="#fff" id="svg_9"/>
+  <path d="m287,223l-55,0a12.5,12.5 0 0 1 0,-25l55,0a12.5,12.5 0 0 1 0,25z" fill="#fff" id="svg_10"/>
+  <rect fill="#ccc" height="21" id="svg_11" rx="10.5" transform="matrix(1 0 0 1 0 0)" width="433" x="102" y="167"/>
+ </g>
+</svg>

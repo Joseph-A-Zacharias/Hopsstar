@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+<head itemscope itemtype="https://schema.org/WebPage">
+{% block title %}Cheat Sheets for Quick Learning and Study Success{% endblock title %}
+{% block  meta %}
+<meta name="description" content="Access detailed cheat sheets for a variety of academic and non-academic subjects. Simplify your studies with these concise, easy-to-understand resources.">
+<link rel="canonical" href="{{ canonical_url }}">
+<meta property="og:title" content="Cheat Sheet Reads">
+<meta property="og:description" content="Discover cheat sheets on academic and non-academic subjects, providing clear and concise resources for easy learning.">
+<meta property="og:url" content="{{ canonical_url }}">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://www.hopelism.com/static/images/Hopelismshare.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta itemprop="name" content="Cheat Sheet Blog">
+<meta itemprop="url" content="{{ request.build_absolute_uri }}">
+<meta itemprop="description" content="Explore comprehensive cheat sheets covering various subjects to enhance your learning experience. Access key concepts and information quickly and efficiently.">
+{% endblock meta %}
+{% block critialcss %}
+.mobile-list{display:none;}
+{% endblock critialcss %}
+{% block content %}
+<div id="notesblog" itemscope itemtype="https://schema.org/Blog" itemprop="articleBody">{{cheatblog_data.cheat_blog |safe}}</div>
+{% endblock content %}

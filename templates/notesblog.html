@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+<head itemscope itemtype="https://schema.org/WebPage">
+{% block title %}Academic Notes & Subject Insights Notes page{% endblock title %}
+{% block  meta %}
+<meta name="description" content="Explore academic notes and subjects, providing you with valuable insights and learning resources on Hopelism.">
+<link rel="canonical" href="{{ canonical_url }}">
+<meta property="og:title" content="Notes">
+<meta property="og:description" content="Explore detailed blogs on academic notes and subjects, providing you with valuable insights and learning resources.">
+<meta property="og:url" content="{{ canonical_url }}">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://www.hopelism.com/static/images/Hopelismshare.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta itemprop="name" content="Academic Notes">
+<meta itemprop="url" content="{{ request.build_absolute_uri }}">
+<meta itemprop="description" content="A collection of academic notes covering various subjects to aid in your learning journey at Hopelism.">
+{% endblock meta %}
+{% block critialcss %}
+.mobile-list{display:none;}
+{% endblock critialcss %}
+{% block content %}
+<div id="notesblog" itemscope itemtype="https://schema.org/Book">
+    {% for note in notes %}
+    <div temscope itemtype="https://schema.org/BookPosting">{{ note | safe }}</div>
+    {% endfor %}
+    <div class="blogbutton">
+    {% if notes.has_previous %}
+        <a href="?page={{ notes.previous_page_number }}">
+            <button class="btn1">Previous page</button>
+        </a>
+    {% endif %}
+    {% if notes.has_next %}
+        <a href="?page={{ notes.next_page_number }}">
+            <button class="btn1">Next page</button>
+        </a>
+    {% endif %}    
+    </div>
+</div>
+{% endblock content %}

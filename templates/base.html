@@ -1,0 +1,184 @@
+{% load static %}
+{% load pwa %}
+<!DOCTYPE html>
+<html lang="en">
+  <head itemscope itemtype="https://schema.org/WebSite">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=IE7">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <meta name="robots" content="index max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="coverage" content="Worldwide">
+    <meta name="distribution" content="Global">
+    <meta name="rating" content="Safe for All">
+    <meta name="geo.region" content="IN">
+    <meta name="geo.placename" content="Kerala">
+    <meta name="copyright" content="Hopelism 2024">
+    <meta name="author" content="Hopelism Intelligent Expert Community">
+    {% block  meta %}{% endblock meta %}
+    {% progressive_web_app_meta %}
+    <title>{% block title %}{% endblock title %}</title>
+    <link rel="profile" href="https://gmpg.org/xfn/11">
+    <link rel="preload" href="{% static "/css/style.css" %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <script rel="preload" src="{% static "/js/script.js" %}" as="script"></script>
+    <link rel="stylesheet" type="text/css" href="{% static "/css/style.css" %}" charset="utf-8">
+    <style>
+      #login_div button{background: white; color: black;}
+      .faq{background:rgb(255, 255, 255); box-shadow: 0px 8px 20px -10px rgba(60, 59, 59, 0.45);}
+      {% block critialcss %}{% endblock critialcss %}
+    </style>   
+  </head>
+  <body>
+    <nav class="navbar"> 
+      <div class="logo">
+        <img src="{% static "/images/Hopelismlogo.svg" %}" alt="">
+        <h1>Hopelism</h1>
+      </div> 
+      <ul class="desktop-list">
+        <li><a href="{% url 'home' %}" class="loadingloader"><button>Home</button></a></li>
+        <li><a href="{% url 'about' %}" class="loadingloader"><button>About</button></a></li>
+        <li><a href="#faqpage"><button>Feedback</button></a></li>
+        <li><a href="#" id="open-popup"><button>Log In</button></a></li>
+      </ul>
+      <ul class="mobile-list">
+        <li><a href="{% url 'home' %}" class="loadingloader"><img src="{% static "/images/home.png" %}" alt="Hopelism home icon"></a></li>
+        <li><a href="{% url 'about' %}" class="loadingloader"><img src="{% static "/images/info.png" %}" alt="Hopelism about icon"></a></li>
+        <li><a href="#faqpage"><img src="{% static "/images/feedback.png" %}" alt=" Hopelism feedback icon"></a></li>
+        <li><a href="#" id="open-popup"><img src="{% static "/images/user.png" %}" alt="Hopelism user Icon"></a></li>
+      </ul>
+    </nav>
+    {% block content %}{% endblock content %}
+    <div class="popup-container" id="popup-container">
+      <div class="overlay">
+        <div id="poppage">
+          {% if user.is_authenticated %}
+            <h2>Hi {{ user.username }} !</h2>
+            <div class="mainfaq">
+              <div class="page_tabs">
+                <div id="login_div">
+                  <form method="post" action="{% url 'account_logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn1">Logout</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          {% else %}
+            <h2>Join Hopelism.</h2>
+            <div class="mainfaq">
+              <div class="page_tabs">
+                <div id="login_div">
+                  {% load socialaccount %} 
+                  <form action="{% provider_login_url 'google' %}" method="post">
+                    {% csrf_token %}
+                    <button class="btn1"><img src="{% static "/images/google.png" %}" alt="">Login with Google</button>
+                  </form>
+                  <form action="{% provider_login_url 'facebook' %}" method="post">
+                    {% csrf_token %}
+                    <button class="btn1"><img src="{% static "/images/facebook.png" %}" alt="">Login with Facebook</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="cover" id="cover">
+      <svg id="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 450">
+        <g>
+          <rect x="50" y="50" width="400" height="400" rx="50" ry="50" fill="black" />
+          <path style="opacity:1" fill="black" d="M 233.5,76.5 C 312.582,74.9355 369.748,109.269 405,179.5C 432.478,254.466 417.311,319.299 359.5,374C 303.757,418.178 243.091,426.178 177.5,398C 123.84,370.237 92.0064,326.404 82,266.5C 76.8694,192.589 105.703,136.422 168.5,98C 188.925,86.6914 210.592,79.5247 233.5,76.5 Z"/>
+          <path style="opacity:1" fill="black" d="M 239.5,103.5 C 301.865,103.073 348.031,130.073 378,184.5C 402.349,242.389 394.183,295.223 353.5,343C 316.497,379.665 272.164,393.665 220.5,385C 160.566,369.067 123.732,330.9 110,270.5C 101.664,204.676 125.831,154.843 182.5,121C 200.597,111.696 219.597,105.863 239.5,103.5 Z"/>
+          <path style="opacity:1" fill="white" d="M 239.5,103.5 C 301.865,103.073 348.031,130.073 378,184.5C 402.349,242.389 394.183,295.223 353.5,343C 316.497,379.665 272.164,393.665 220.5,385C 160.566,369.067 123.732,330.9 110,270.5C 101.664,204.676 125.831,154.843 182.5,121C 200.597,111.696 219.597,105.863 239.5,103.5 Z"/>
+          <path style="opacity:1" fill="black" d="M 213.5,151.5 C 213.5,177.5 213.5,203.5 213.5,229.5C 237.5,229.5 261.5,229.5 285.5,229.5C 285.5,203.5 285.5,177.5 285.5,151.5C 300.833,151.5 316.167,151.5 331.5,151.5C 331.5,188.167 331.5,224.833 331.5,261.5C 277.167,261.5 222.833,261.5 168.5,261.5C 168.5,224.833 168.5,188.167 168.5,151.5C 183.5,151.5 198.5,151.5 213.5,151.5 Z"/>
+          <path style="opacity:1" fill="black" d="M 168.5,276.5 C 183.5,276.5 198.5,276.5 213.5,276.5C 213.5,298.5 213.5,320.5 213.5,342.5C 198.5,342.5 183.5,342.5 168.5,342.5C 168.5,320.5 168.5,298.5 168.5,276.5 Z"/>
+          <path style="opacity:1" fill="black" d="M 285.5,276.5 C 300.5,276.5 315.5,276.5 330.5,276.5C 330.5,298.5 330.5,320.5 330.5,342.5C 315.5,342.5 300.5,342.5 285.5,342.5C 285.5,320.5 285.5,298.5 285.5,276.5 Z"/>
+        </g>
+      </svg>
+    </div>
+    <section id="faqpage">
+      <div class="feedbackcontainermainbox">
+        <div class="feedbackcontainerbox">
+          <h2>Leave Us a Message</h2>
+          <p>If you have any questions or comments, please fill out the form below and we will get back to you as soon as possible.</p>
+          <div class="mainfaq">
+            <div class="faq">
+              <h1 class="faqh1">Feedback</h1> 
+              <form id="submit-form" action="{% url 'submit_feedback' %}" method="post">
+                {% csrf_token %}
+                <div class="formgroup">
+                  <input type="text" id="username" placeholder="Name" name="name" class="formborder" required autocomplete="name">
+                  <input type="tel" id="mobile" placeholder="Mobile" name="mobile" class="formborder" required autocomplete="tel">
+                  <input type="email" id="email" placeholder="Email" name="email" class="formborder" required autocomplete="email">
+                  <textarea id="subject" placeholder="Message" name="message" class="formborder" rows="4" required autocomplete="off"></textarea>
+                </div>
+                <button type="submit" class="btn1">Send</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <div class="footerboxflex">
+        <div class="footerbox1">
+          <a href="{% url 'partner' %}" class="loadingloader" hidden><h6>Become A Partner</h6></a>
+          <a href="{% url 'terms_and_conditions' %}" class="loadingloader"><h6>Terms & Condition</h6></a>
+          <a href="{% url 'privacy' %}" class="loadingloader"><h6>Privacy Policy</h6></a>
+          <a href="{% url 'cookies' %}" class="loadingloader"><h6>Cookies Policy</h6></a>
+        </div>
+        <div class="footerbox2">
+          <img src="{% static "/images/Hopelismlogo.svg" %}" alt="">
+        </div>
+      </div>
+      <div id="install-popup" class="install-popup">
+        <div class="install-popup1">
+          <svg id="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 450">
+            <g>
+              <rect x="50" y="50" width="400" height="400" rx="50" ry="50" fill="black" />
+              <path style="opacity:1" fill="black" d="M 233.5,76.5 C 312.582,74.9355 369.748,109.269 405,179.5C 432.478,254.466 417.311,319.299 359.5,374C 303.757,418.178 243.091,426.178 177.5,398C 123.84,370.237 92.0064,326.404 82,266.5C 76.8694,192.589 105.703,136.422 168.5,98C 188.925,86.6914 210.592,79.5247 233.5,76.5 Z"/>
+              <path style="opacity:1" fill="black" d="M 239.5,103.5 C 301.865,103.073 348.031,130.073 378,184.5C 402.349,242.389 394.183,295.223 353.5,343C 316.497,379.665 272.164,393.665 220.5,385C 160.566,369.067 123.732,330.9 110,270.5C 101.664,204.676 125.831,154.843 182.5,121C 200.597,111.696 219.597,105.863 239.5,103.5 Z"/>
+              <path style="opacity:1" fill="white" d="M 239.5,103.5 C 301.865,103.073 348.031,130.073 378,184.5C 402.349,242.389 394.183,295.223 353.5,343C 316.497,379.665 272.164,393.665 220.5,385C 160.566,369.067 123.732,330.9 110,270.5C 101.664,204.676 125.831,154.843 182.5,121C 200.597,111.696 219.597,105.863 239.5,103.5 Z"/>
+              <path style="opacity:1" fill="black" d="M 213.5,151.5 C 213.5,177.5 213.5,203.5 213.5,229.5C 237.5,229.5 261.5,229.5 285.5,229.5C 285.5,203.5 285.5,177.5 285.5,151.5C 300.833,151.5 316.167,151.5 331.5,151.5C 331.5,188.167 331.5,224.833 331.5,261.5C 277.167,261.5 222.833,261.5 168.5,261.5C 168.5,224.833 168.5,188.167 168.5,151.5C 183.5,151.5 198.5,151.5 213.5,151.5 Z"/>
+              <path style="opacity:1" fill="black" d="M 168.5,276.5 C 183.5,276.5 198.5,276.5 213.5,276.5C 213.5,298.5 213.5,320.5 213.5,342.5C 198.5,342.5 183.5,342.5 168.5,342.5C 168.5,320.5 168.5,298.5 168.5,276.5 Z"/>
+              <path style="opacity:1" fill="black" d="M 285.5,276.5 C 300.5,276.5 315.5,276.5 330.5,276.5C 330.5,298.5 330.5,320.5 330.5,342.5C 315.5,342.5 300.5,342.5 285.5,342.5C 285.5,320.5 285.5,298.5 285.5,276.5 Z"/>
+            </g>
+          </svg>
+          <div class="install-popup2">
+            <p>Install <span>Hopelism </span>app</p>
+            <button id="install-button-2">Install</button>
+          </div>
+        </div>
+      </div>
+    </div>     
+      <div class="footer">
+        <h6 style="margin-top: 10px;"> Copyright &COPY; 2024 Hopelism | All Rights Reserved</h6>
+      </div>
+    </footer>
+    <div id="themainloader">
+      <div class="loderdiv">
+        <img class="coverimg" src="{% static "/images/Hopelismlogo.svg" %}" alt="">
+        <div class="loader02"></div>
+      </div>
+      <div id="install-popup" class="install-popup" hidden>
+        <div class="install-popup1">
+          <svg id="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 450">
+            <g>
+              <rect x="50" y="50" width="400" height="400" rx="50" ry="50" fill="black" />
+              <path style="opacity:1" fill="black" d="M 233.5,76.5 C 312.582,74.9355 369.748,109.269 405,179.5C 432.478,254.466 417.311,319.299 359.5,374C 303.757,418.178 243.091,426.178 177.5,398C 123.84,370.237 92.0064,326.404 82,266.5C 76.8694,192.589 105.703,136.422 168.5,98C 188.925,86.6914 210.592,79.5247 233.5,76.5 Z"/>
+              <path style="opacity:1" fill="black" d="M 239.5,103.5 C 301.865,103.073 348.031,130.073 378,184.5C 402.349,242.389 394.183,295.223 353.5,343C 316.497,379.665 272.164,393.665 220.5,385C 160.566,369.067 123.732,330.9 110,270.5C 101.664,204.676 125.831,154.843 182.5,121C 200.597,111.696 219.597,105.863 239.5,103.5 Z"/>
+              <path style="opacity:1" fill="white" d="M 239.5,103.5 C 301.865,103.073 348.031,130.073 378,184.5C 402.349,242.389 394.183,295.223 353.5,343C 316.497,379.665 272.164,393.665 220.5,385C 160.566,369.067 123.732,330.9 110,270.5C 101.664,204.676 125.831,154.843 182.5,121C 200.597,111.696 219.597,105.863 239.5,103.5 Z"/>
+              <path style="opacity:1" fill="black" d="M 213.5,151.5 C 213.5,177.5 213.5,203.5 213.5,229.5C 237.5,229.5 261.5,229.5 285.5,229.5C 285.5,203.5 285.5,177.5 285.5,151.5C 300.833,151.5 316.167,151.5 331.5,151.5C 331.5,188.167 331.5,224.833 331.5,261.5C 277.167,261.5 222.833,261.5 168.5,261.5C 168.5,224.833 168.5,188.167 168.5,151.5C 183.5,151.5 198.5,151.5 213.5,151.5 Z"/>
+              <path style="opacity:1" fill="black" d="M 168.5,276.5 C 183.5,276.5 198.5,276.5 213.5,276.5C 213.5,298.5 213.5,320.5 213.5,342.5C 198.5,342.5 183.5,342.5 168.5,342.5C 168.5,320.5 168.5,298.5 168.5,276.5 Z"/>
+              <path style="opacity:1" fill="black" d="M 285.5,276.5 C 300.5,276.5 315.5,276.5 330.5,276.5C 330.5,298.5 330.5,320.5 330.5,342.5C 315.5,342.5 300.5,342.5 285.5,342.5C 285.5,320.5 285.5,298.5 285.5,276.5 Z"/>
+            </g>
+          </svg>
+          <div class="install-popup2">
+            <p>Install<span>Hopelism </span></p>
+            <button id="install-button">Install</button>
+          </div>
+        </div>
+      </div>
+    </div>     
+  </body>
+</html>

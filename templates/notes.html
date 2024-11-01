@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load static %}
+<head itemscope itemtype="https://schema.org/WebPage">
+{% block title %}Explore Academic & Non-Academic Notes for Effective Learning{% endblock title %}
+{% block  meta %}
+<meta name="description" content="Discover notes on academic and non-academic subjects. Our resources simplify learning, making it accessible for everyone at Hopelism.">
+<meta name="keywords" content="academic notes, non-academic notes, study resources, learning materials, educational notes, study guides, academic help, subject notes, Hopelism notes, knowledge resources, learning tools, simplified learning, exam preparation, topic summaries, effective learning, study aids, education platform, quick notes, student resources">
+<meta name="classification" content="Study Materials, Academic Resources, Learning, Educational Notes, Research, Academic Success">
+<link rel="canonical" href="{{ canonical_url }}">
+<meta property="og:title" content="Explore Academic & Non-Academic Notes">
+<meta property="og:description" content="Discover notes on academic and non-academic subjects. Our resources simplify learning, making it accessible for everyone.">
+<meta property="og:url" content="{{ canonical_url }}">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://www.hopelism.com/static/images/Hopelismshare.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta itemprop="name" content="Hopelism Notes">
+<meta itemprop="url" content="{{ request.build_absolute_uri }}">
+<meta itemprop="description" content="Access a variety of educational notes provided by Hopelism.">
+{% endblock meta %}
+{% block critialcss %}
+.mobile-list{display:none;}
+{% endblock critialcss %}
+{% block content %}
+<form id="searchForm" action="{% url 'notesearch' %}" method="POST">
+    {% csrf_token %}
+    <div class="searchbox">
+      <div class="box">
+        <image src="{% static "/images/search.png" %}" alt="Search Icon">
+        <input type="text" id="searchInput1" name="searchInput1" placeholder="Search Notes..">
+      </div>
+      <div id="searchResults"></div>
+    </div>
+</form>
+<div class="mainbox">
+    {% if unique_notes %}
+        {% for note_name, note_subjects in unique_notes.items %}
+            <div class="notelistdiv1" itemscope itemtype="https://schema.org/ItemList">
+                <details>
+                    <summary class="bordernotes">
+                        <h3 itemprop="name">{{ note_name|upper }}</h3>
+                    </summary>
+                    <div class="notelistdiv2">
+                        {% for note_subject in note_subjects %}
+                            <a href="{% url 'noteslist' note_name note_subject %}" class="loadingloader" itemscope itemtype="https://schema.org/Thing" itemprop="itemListElement">
+                                <h4 itemprop="name">{{ note_subject|title }}</h4>
+                            </a>
+                        {% endfor %}
+                    </div>
+                </details>
+            </div>
+        {% endfor %} 
+    {% elif notesearch_data %}
+        {% for result in notesearch_data %}
+            <div class="notelistdiv1">
+                <details>
+                    <summary class="bordernotes">
+                        <h3>{{ result.note_name|upper }}</h3>
+                    </summary>
+                    <div class="notelistdiv2">
+                        {% for subject in result.note_subjects %}
+                            <a href="{% url 'noteslist' result.note_name subject %}" class="loadingloader">
+                                <h4>{{ subject|title }}</h4>
+                            </a>
+                       {% endfor %}
+                    </div>
+                </details>
+            </div>
+       {% endfor %}
+    {% else %}
+        {% if request.method == 'POST' %}        
+            <summary class="faq-header">
+                <h5 class="cheatsheeth5">Search result not found !</h5>
+            </summary>
+        {% endif %}
+    {% endif %}
+</div>
+{% endblock content %}

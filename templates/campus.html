@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load static %}
+<head itemscope itemtype="https://schema.org/WebPage">
+{% block title %}Leading Colleges, Schools and Institutions for All Levels{% endblock title %}
+{% block  meta %}
+<meta name="description" content="Discover top colleges, schools, and institutions for every level of education. Start your academic journey today by exploring the best campuses with Hopelism.">
+<meta name="keywords" content="top colleges, best schools, leading institutions, universities, higher education,secondary schools, academic journey, top campuses, education platform, college rankings, university listings, high schools, middle schools, graduate programs, undergraduate programs, college search, school search, admissions guide, top-rated schools, education institutions">
+<meta name="classification" content="Colleges, Schools, Educational Institutions, Higher Education, Academic Programs, Campus Resources, Student Life, College Admissions, Educational Opportunities">
+<link rel="canonical" href="{{ canonical_url }}">
+<meta property="og:title" content="Discover Leading Colleges, Schools and Institutions for All Levels">
+<meta property="og:description" content="Explore the best campuses and institutions at every level of education with Hopelism. Start your academic journey today!">
+<meta property="og:url" content="{{ canonical_url }}">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://www.hopelism.com/static/images/Hopelismshare.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta itemprop="name" content="Hopelism Campus">
+<meta itemprop="url" content="{{ request.build_absolute_uri }}">
+<meta itemprop="description" content="Discover top colleges, schools, and institutions for every level of education. Start your academic journey today by exploring the best campuses with Hopelism.">
+{% endblock meta %}
+{% block critialcss %}
+.mobile-list{display:none;}
+{% endblock critialcss %}
+{% block content %}
+    <form id="searchForm" action="{% url 'campussearch' %}" method="POST">
+        {% csrf_token %}
+        <div class="searchbox">
+            <div class="box">
+                <img src="{% static 'images/search.png' %}" alt="Search Icon">
+                <input type="text" id="searchInput1" name="searchInput1" placeholder="Search Campus..">
+            </div>
+            <div id="searchResults"></div>
+        </div>
+    </form>
+    <div class="mainbox">
+        {% if unique_campus %}
+            {% for category_name, states in unique_campus.items %}
+                <div class="notelistdiv1" itemscope itemtype="https://schema.org/ItemList">
+                    <details>
+                        <summary class="bordercampus">
+                            <h3 itemprop="name">{{ category_name|upper }}</h3>
+                        </summary>
+                        <div class="notelistdiv2" itemprop="itemListElement" itemscope itemtype="https://schema.org/ItemList">
+                            {% for state in states %}
+                                <a href="{% url 'campuslist' category_name state %}" class="loadingloader" itemscope itemtype="https://schema.org/Thing">
+                                    <h4 itemprop="name">{{ state|title }}</h4>
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </details>
+                </div>
+            {% endfor %}
+        {% elif campussearch_data %}
+            {% for result in campussearch_data %}
+                <div class="notelistdiv1">
+                    <details>
+                        <summary class="bordercampus">
+                            <h3>{{ result.category_name|upper }}</h3>
+                        </summary>
+                        <div class="notelistdiv2">
+                            {% for state in result.states %}
+                                <a href="{% url 'campuslist' result.category_name state %}" class="loadingloader">
+                                    <h4>{{ state|title }}</h4>
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </details>
+                </div>
+            {% endfor %}
+        {% else %}
+            {% if request.method == 'POST' %}        
+                <summary class="faq-header">
+                    <h5 class="cheatsheeth5">Search result not found!</h5>
+                </summary>
+            {% endif %}
+        {% endif %}
+    </div>
+{% endblock content %}

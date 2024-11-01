@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+<head itemscope itemtype="https://schema.org/WebPage">
+{% block title %}Academic & Non-Academic Notes Resources List{% endblock title %}
+{% block  meta %}
+<meta name="description" content="Browse a comprehensive list of academic and non-academic notes to enhance your learning experience on Hopelism.">
+<link rel="canonical" href="{{ canonical_url }}">
+<meta property="og:description" content="Browse a comprehensive list of academic and non-academic notes to enhance your learning experience.">
+<meta property="og:url" content="{{ canonical_url }}">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://www.hopelism.com/static/images/Hopelismshare.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta itemprop="name" content="Hopelism Notes List">
+<meta itemprop="url" content="{{ request.build_absolute_uri }}">
+<meta itemprop="description" content="Explore a comprehensive collection of academic and non-academic notes, designed to enhance your learning experience. Find notes across various subjects at Hopelism.">
+{% endblock meta %}
+{% block critialcss %}
+.mobile-list{display:none;}
+.notelistbox button{background-color: #4c49ea;}
+.notelistbox2 h6{color:#4c49ea}
+{% endblock critialcss %}
+{% block content %}
+<div class="mainbox">
+  {% if notes_ads_data   %}
+    {% for notesads in notes_ads_data %} 
+      <div class="notelistbox bordernotes">
+        <div class="notelistbox2"><h6>ad</h6></div>
+        <h2 class="faqh1">{{ notesads.ad_note_head }}</h2>
+        <a href="{{ notesads.ad_note_link }}" class="loadingloader">
+          <button class="btn1 cheatsheeth5">view more details</button>
+        </a>
+      </div>
+    {% endfor %}
+  {% endif %} 
+  {% if chapter_data %}
+    {% for chapter in chapter_data %} 
+      <div class="notelistbox bordernotes" itemscope itemtype="https://schema.org/Book">
+        <h2 class="faqh1" itemprop="name">{{ chapter.chapter_name }}</h2>
+        <a href="{% url 'notesblog' chapter.chapter_name %}" class="loadingloader" itemprop="url">
+          <button class="btn1 cheatsheeth5" style="background-color: #4c49ea;">Read The Book</button>
+        </a>
+        <div class="page_tabsh5" hidden>or</div>
+        <button class="btn1 cheatsheeth5" style="background-color: #4c49ea;" hidden>Buy the Book <img src="{% static "/images/hopsstarshopping.png" %}" alt=""></button>
+      </div>
+    {% endfor %}
+  {% endif %}
+</div> 
+{% endblock content %}

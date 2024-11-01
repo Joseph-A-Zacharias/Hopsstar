@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+<head itemscope itemtype="https://schema.org/WebPage">
+{% block title %}All Types of Career Opportunities for Freshers and Experienced{% endblock title %}
+{% block  meta %}
+<meta name="description" content="Discover exciting career opportunities across various industries. Unlock your potential and explore Hopelism today to land your dream job.">
+<meta name="keywords" content="career opportunities,freshers jobs,experienced jobs,job openings,job vacancies,industry careers,professional growth,job search,career development,dream job,employment opportunities,recruitment,job market,internships,graduate jobs,full-time jobs,career guidance,career portal">
+<meta name="classification" content="Job Vacancies, Career Opportunities, Employment, Recruitment, Job Search, Professional Development, Industry Jobs">
+<link rel="canonical" href="{{ canonical_url }}">
+<meta property="og:title" content="Find All Types of Career Opportunities Across Various Fields">
+<meta property="og:description" content="Explore career opportunities across a variety of industries and fields. Find your next role and achieve career success with Engsster.">
+<meta property="og:url" content="{{ canonical_url }}">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://www.hopelism.com/static/images/Hopelismshare.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta itemprop="name" content="Career Opportunities">
+<meta itemprop="url" content="{{ request.build_absolute_uri }}">
+<meta itemprop="description" content="Discover exciting career opportunities across various industries. Unlock your potential and explore Hopelism today to land your dream job.">
+{% endblock meta %}
+{% block critialcss %}
+.mobile-list{display:none;}
+{% endblock critialcss %}
+{% block content %}
+<form id="searchForm" action="{% url 'careersearch' %}" method="POST">
+  {% csrf_token %}
+  <div class="searchbox">
+    <div class="box">
+      <image src="{% static "/images/search.png" %}" alt="Search Icon">
+      <input type="text" id="searchInput3" name="searchInput3" placeholder="Search Careers...">
+    </div>
+    <div id="searchResults"></div>
+  </div>
+</form>
+<div class="mainbox">
+  {% if careername_data %}
+    {% for career_name in careername_data %}
+      <div class="notelistdiv1" itemscope itemtype="https://schema.org/JobPosting">
+        <a href="{% url 'careerslist' career_name %}" class="loadingloader" itemprop="url">
+          <summary style="border-bottom: 4px solid #E44002; border-top: 4px solid #E44002;">
+            <h3 itemprop="title">{{ career_name|upper }}</h3>
+          </summary>
+        </a>
+      </div>
+    {% endfor %}
+  {% elif careersearch_data %}
+    {% for career_name in careersearch_data %}
+      <div class="notelistdiv1">
+        <a href="{% url 'careerslist' career_name %}" class="loadingloader">
+          <summary style="border-bottom: 4px solid #E44002; border-top: 4px solid #E44002;">
+            <h3>{{ career_name|upper }}</h3>
+          </summary>
+        </a>
+      </div>
+    {% endfor %}
+  {% else %}
+    {% if request.method == 'POST' %}
+      <summary class="faq-header">
+        <h5 class="cheatsheeth5">Search result not found!</h5>
+      </summary>
+    {% endif %}
+  {% endif %}
+</div>
+{% endblock content %}

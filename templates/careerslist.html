@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+<head itemscope itemtype="https://schema.org/WebPage">
+{% block title %}All Types of Career Opportunities List{% endblock title %}
+{% block  meta %}
+<meta name="description" content="Browse exciting job vacancies and career opportunities across various industries. Unlock your potential and explore the best jobs on Hopelism.">
+<link rel="canonical" href="{{ canonical_url }}">
+<meta property="og:title" content="Explore Career Opportunities List">
+<meta property="og:description" content="Through a list of exciting career opportunities across various fields. Unlock your potential with the best job offers from Hopelism.">
+<meta property="og:url" content="{{ canonical_url }}">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://www.hopelism.com/static/images/Hopelismshare.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta itemprop="name" content="Careers List">
+<meta itemprop="url" content="{{ request.build_absolute_uri }}">
+<meta itemprop="description" content="Explore an extensive collection of exciting job vacancies and career opportunities across multiple sectors. Find your ideal job and take the next step in your professional journey with Hopelism.">
+{% endblock meta %}
+{% block critialcss %}
+.mobile-list{display:none;}
+{% endblock critialcss %}
+{% block content %}
+<div class="mainbox">
+    {% if careers_ads_data %}
+        {% for careerads in careers_ads_data %}
+            <div class="notelistbox" style="border-bottom: 4px solid #E44002; border-top: 4px solid #E44002;">
+                <div class="notelistbox2" style="color:#E44002;"><h6>ad</h6></div>
+                <h2 class="faqh1">{{ careerads.ad_career_head }}</h2>
+                <a href="{{ careerads.ad_career_link }}" class="loadingloader">
+                    <button class="btn1 cheatsheeth5" style="background: #d73e06;">view more details</button>
+                </a>
+           </div>
+        {% endfor %}
+    {% endif %}
+   {% if careerdiscrp_data %}
+        {% for careerdis in careerdiscrp_data %}
+            <div class="notelistbox" itemscope itemtype="https://schema.org/ItemList" style="border-bottom: 4px solid #E44002; border-top: 4px solid #E44002;">
+                <h2 class="faqh1" itemprop="name">{{ careerdis.career_descirption }}</h2>
+                <a href="{% url 'careersblog' careerdis.career_descirption %}" class="loadingloader" itemprop="url">
+                    <button class="btn1 cheatsheeth5" style="background: #d73e06;">view more details</button>
+                </a>
+           </div>
+        {% endfor %}
+    {% endif %}
+</div>
+{% endblock content %}

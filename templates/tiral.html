@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{% endblock title %}
+{% block content %}
+<div class="mainfaq">
+    <div class="faq">
+        
+        <h2 class="faqh1">{{note.chapter_name}}</h2>
+        <a href="{% url 'notesblog' note.id %}"><button class="btn1 cheatsheeth5" style="background: whitesmoke; color: black;">Click Here</button></a>
+        
+    </div>
+</div>
+{% endblock content %}
