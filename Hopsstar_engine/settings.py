@@ -26,13 +26,16 @@ SECRET_KEY = 'django-insecure-m=km3y87kwypc0my-=q%*v&c8deq&00=@*x_wjk709^k987cp_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1',]
+ALLOWED_HOSTS = ['hopelism', 'www.hopelism.com', '145.223.21.101', 'hopelism.com']
 
-# CSRF settings
+
 CSRF_TRUSTED_ORIGINS = [
     'https://hopelism.com',
-    'https://www.hopelism.com'
+    'https://www.hopelism.com',
+    'http://hopelism.com',  # Include HTTP as well
+    'http://www.hopelism.com'  # Include HTTP as well
 ]
+
 
 
 
