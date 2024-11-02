@@ -1,3 +1,13 @@
+## hopsstar vps
+
+1.vps user name
+
+```
+ssh joseph@145.223.21.101
+    ```
+
+
+
 ## Installation
 
 1. Clone the repository to your local machine:
