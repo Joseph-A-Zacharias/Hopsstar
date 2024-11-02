@@ -1,10 +1,26 @@
 
 
-1.vps user name
+1.vps user name  ssh
+
+```bash
+   joseph@145.223.21.101 
+```
 
 
+2 vps user password 
 
+```bash
+  ObUibXy9roiG2yG  
+ ```
+3 virtual venv actavte
 
+```bash
+  source hopsstar-env/bin/activate  
+```
+4 source hopsstar-env/bin/activate
+```bash
+  python3 manage.py runserver 0.0.0.0:8000  
+```
 
 ## Installation
 
@@ -44,13 +60,18 @@
 
 ## Usage
 
-1. Start the Django development server:
+1. 
 
     ```bash
     python3 manage.py runserver
     ```
+    or
 
-2. Open a web browser and go to [http://127.0.0.1:8000/](http://127.0.0.1:8000/) to access the application.
+   ```bash
+    
+    ```
+
+3. Open a web browser and go to [http://127.0.0.1:8000/](http://127.0.0.1:8000/) to access the application.
 
 
 ## License
