@@ -15,11 +15,11 @@ ObUibXy9roiG2yG
 3 virtual venv actavte
 
 ```bash
-  source hopsstar-env/bin/activate  
+source hopsstar-env/bin/activate
 ```
 4 source hopsstar-env/bin/activate
 ```bash
-  python3 manage.py runserver 0.0.0.0:8000  
+python3 manage.py runserver 0.0.0.0:8000
 ```
 
 ## Installation
