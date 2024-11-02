@@ -10,7 +10,7 @@ ssh joseph@145.223.21.101
 2 vps user password 
 
 ```bash
-  ObUibXy9roiG2yG  
+ObUibXy9roiG2yG  
  ```
 3 virtual venv actavte
 
