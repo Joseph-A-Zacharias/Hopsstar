@@ -3,7 +3,7 @@
 1.vps user name  ssh
 
 ```bash
-   joseph@145.223.21.101 
+ssh joseph@145.223.21.101 
 ```
 
 
